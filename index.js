@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 
@@ -18,11 +18,13 @@ app.post("/product/:id", (req, res) => {
   const { name } = req.body;
 
   if (!name) {
-    res.status(418).send({ message: "Please, provide a name for" + " " + id });
+    res
+      .status(418)
+      .send({ message: `Provide a name for the product with ID: ${id}` });
   }
   res.send({
     name: name,
   });
 });
 
-app.listen(PORT, () => console.log("Holi"));
+app.listen(PORT, () => console.log("Hallo World"));
